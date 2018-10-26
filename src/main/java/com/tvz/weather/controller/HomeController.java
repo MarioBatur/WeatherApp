@@ -3,30 +3,26 @@ package com.tvz.weather.controller;
 import java.net.URL;
 
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 import com.tvz.weather.api.WeatherBitApi;
 
-@Controller
+@RestController
 @RequestMapping("/main")
 public class HomeController {
+	
 
-    @GetMapping("/home")
-    public String weatherPage(Model theModel) {
-
-        theModel.addAttribute("Weather", new WeatherBitApi());
-
-        return "home-page";
-    }
-
-    @GetMapping(value = "/processForm")
+    @CrossOrigin()
+    @RequestMapping(value = "/processForm", method=RequestMethod.GET)
     public String processForm(@RequestParam("name") String name, Model theModel) {
 
         // create object mapper
@@ -50,9 +46,13 @@ public class HomeController {
             theModel.addAttribute("Error", "Nepoznata lokacija molimo Vas pružite točnu lokaciju");
         }
 
+        
         theModel.addAttribute("Weather", new WeatherBitApi());
 
-        return "home-page";
+        Gson g = new Gson();
+        String json = g.toJson(theModel);
+        
+        return json;
     }
 
     @InitBinder

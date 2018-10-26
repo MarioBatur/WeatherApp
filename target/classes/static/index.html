@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+<title>Vremenska prognoza</title>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.5/angular.min.js"></script>
+<script src="/index.js"></script>
+<link rel="stylesheet" href="/index.css"></link>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+</head>
+
+<script>
+	
+</script>
+
+<style>
+</style>
+<body class="bg" ng-controller="WeatherController">
+	<!--
+	{{podaci}}
+	-->
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12">
+				<h1 class="text-center">
+					<b> Vremenska prognoza </b>
+				</h1>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12 col-sm-6">Unesite lokaciju</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12 col-sm-6">
+				<br />
+				<form name="mojaForma" ng-submit="dohvatiPrognozu()" novalidate>
+					<div class="form-group">
+						<input ng-model="data" class="form-control"
+							placeholder="Naziv grada" required> <br />
+					</div>
+					<button class="btn btn-primary" type="submit"
+						ng-disabled="mojaForma.$invalid">Dohvati prognozu</button>
+				</form>
+			</div>
+		</div>
+		<div class="row" ng-show="sakriveno">
+			<div class="alert alert-danger" role="alert">{{podaci.Error}}</div>
+		</div>
+		<div class="row" ng-show="prikazano">
+			<div class="col-md-6">
+				<div class="panel panel-info">
+					<!-- Default panel contents -->
+					<div class="panel-heading">
+						<h4 class="glyphicon glyphicon-search">Vremenska prognoza za
+							{{podaci.currentWeather.name}},
+							{{podaci.currentWeather.sys.country}}</h4>
+					</div>
+
+					<!-- List group -->
+					<ul class="list-group">
+						<li class="list-group-item">Relativna vlažnost zraka:
+							{{podaci.currentWeather.main.humidity}}%</li>
+						<li class="list-group-item">Temperatura zraka
+							{{podaci.currentWeather.main.temp}}°C</li>
+						<li class="list-group-item">Maksimalna temperatura zraka
+							{{podaci.currentWeather.main.temp_max}}°C</li>
+						<li class="list-group-item">Minimalna temperatura zraka
+							{{podaci.currentWeather.main.temp_min}}°C</li>
+						<li class="list-group-item">{{podaci.currentWeather.weather[0].description}}</li>
+					</ul>
+				</div>
+			</div>
+				<div class="col-md-6">
+					<div class="media">
+						<div class="media-left">
+							 <img class="media-object" src="https://media.giphy.com/media/3og0ICH4dOeWmrQMqA/source.gif" style="width: 52px; height: 52px;">
+						</div>
+						<div class="media-body">
+							<h4 class="media-heading">Izlazak sunca</h4>
+							{{podaci.sunriseTime}}
+						</div>
+					</div>
+					<div class="media">
+						<div class="media-left">
+							 <img class="media-object" src="https://media.giphy.com/media/dP8DxhD9ekk1i/giphy.gif" style="width: 52px; height: 52px;">
+						</div>
+						<div class="media-body">
+							<h4 class="media-heading">Zalazak sunca</h4>
+							{{podaci.sunsetTime}}
+						</div>
+					</div>
+					<div class="media">
+						<div class="media-left">
+							 <img class="media-object" src="https://media.giphy.com/media/HmTLatwLWpTQk/giphy.gif" style="width: 52px; height: 52px;">
+						</div>
+						<div class="media-body">
+							<h4 class="media-heading">Vjetar</h4>
+							{{podaci.currentWeather.wind.speed}} m/s
+						</div>
+					</div>
+					<div></div>
+				</div>
+		</div>
+</body>
+</html>
