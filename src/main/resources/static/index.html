@@ -16,19 +16,23 @@
 
 <style>
 </style>
-<body class="bg" ng-controller="WeatherController">
+<body
+	ng-class="{'vedro':'bg default', 'sunce':'bg sunce', 'kisa':'bg kisa', 'oblacno':'bg oblacno', 'snijeg':'bg snijeg', 'oluja':'bg oluja', 'magla':'bg magla'}[opis]"
+	ng-controller="WeatherController">
 	<!--
 	{{podaci}}
 	-->
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-12">
-				<h1 class="text-center">
+				<h1
+					ng-class="{'vedro':'text-center', 'sunce':'text-center', 'kisa':'text-center', 'oblacno':'text-center white', 'snijeg':'text-center', 'oluja':'text-center white', 'magla':'text-center'}[opis]">
 					<b> Vremenska prognoza </b>
 				</h1>
 			</div>
 		</div>
-		<div class="row">
+		<div
+			ng-class="{'vedro':'row', 'sunce':'row', 'kisa':'row', 'oblacno':'row white', 'snijeg':'row', 'oluja':'row white', 'magla':'row'}[opis]">
 			<div class="col-xs-12 col-sm-6">Unesite lokaciju</div>
 		</div>
 		<div class="row">
@@ -44,63 +48,71 @@
 				</form>
 			</div>
 		</div>
+		<br />
 		<div class="row" ng-show="sakriveno">
 			<div class="alert alert-danger" role="alert">{{podaci.Error}}</div>
 		</div>
 		<div class="row" ng-show="prikazano">
 			<div class="col-md-6">
 				<div class="panel panel-info">
-					<!-- Default panel contents -->
 					<div class="panel-heading">
-						<h4 class="glyphicon glyphicon-search">Vremenska prognoza za
+						<h4 class="glyphicon glyphicon-search"> Vremenska prognoza za
 							{{podaci.currentWeather.name}},
 							{{podaci.currentWeather.sys.country}}</h4>
 					</div>
 
-					<!-- List group -->
 					<ul class="list-group">
-						<li class="list-group-item">Relativna vlažnost zraka:
-							{{podaci.currentWeather.main.humidity}}%</li>
-						<li class="list-group-item">Temperatura zraka
-							{{podaci.currentWeather.main.temp}}°C</li>
-						<li class="list-group-item">Maksimalna temperatura zraka
-							{{podaci.currentWeather.main.temp_max}}°C</li>
-						<li class="list-group-item">Minimalna temperatura zraka
-							{{podaci.currentWeather.main.temp_min}}°C</li>
-						<li class="list-group-item">{{podaci.currentWeather.weather[0].description}}</li>
+						<li class="list-group-item"><span class="badge">{{podaci.currentWeather.main.humidity}}%</span>
+							Relativna vlažnost zraka:</li>
+						<li class="list-group-item"><span class="badge classic">{{podaci.currentWeather.main.temp}}°C</span>
+							Temperatura zraka:</li>
+						<li class="list-group-item"><span class="badge max">{{podaci.currentWeather.main.temp_max}}°C</span>
+							Maksimalna temperatura zraka:</li>
+						<li class="list-group-item"><span class="badge min">{{podaci.currentWeather.main.temp_min}}°C</span>
+							Minimalna temperatura zraka:</li>
+						<li class="list-group-item"><span class="badge">{{podaci.currentWeather.weather[0].description}}</span>
+							Opis vremena:</li>
 					</ul>
 				</div>
 			</div>
-				<div class="col-md-6">
-					<div class="media">
-						<div class="media-left">
-							 <img class="media-object" src="https://media.giphy.com/media/3og0ICH4dOeWmrQMqA/source.gif" style="width: 52px; height: 52px;">
-						</div>
-						<div class="media-body">
-							<h4 class="media-heading">Izlazak sunca</h4>
-							{{podaci.sunriseTime}}
-						</div>
+			<div class="col-md-6">
+				<div class="media">
+					<div class="media-left">
+						<img class="media-object img-circle"
+							src="https://media.giphy.com/media/xfuWEmE8AkO6A/giphy.gif"
+							style="width: 100px; height: 80px;">
 					</div>
-					<div class="media">
-						<div class="media-left">
-							 <img class="media-object" src="https://media.giphy.com/media/dP8DxhD9ekk1i/giphy.gif" style="width: 52px; height: 52px;">
-						</div>
-						<div class="media-body">
-							<h4 class="media-heading">Zalazak sunca</h4>
-							{{podaci.sunsetTime}}
-						</div>
+					<div
+						ng-class="{'vedro':'media-body', 'sunce':'media-body', 'kisa':'media-body', 'oblacno':'media-body white', 'snijeg':'media-body', 'oluja':'media-body white', 'magla':'media-body'}[opis]"">
+						<h4 class="media-heading">Izlazak sunca</h4>
+						{{podaci.sunriseTime}}
 					</div>
-					<div class="media">
-						<div class="media-left">
-							 <img class="media-object" src="https://media.giphy.com/media/HmTLatwLWpTQk/giphy.gif" style="width: 52px; height: 52px;">
-						</div>
-						<div class="media-body">
-							<h4 class="media-heading">Vjetar</h4>
-							{{podaci.currentWeather.wind.speed}} m/s
-						</div>
-					</div>
-					<div></div>
 				</div>
+				<div class="media">
+					<div class="media-left">
+						<img class="media-object img-circle"
+							src="https://thumbs.gfycat.com/GrossAnotherAngelfish-small.gif"
+							style="width: 100px; height: 75px;">
+					</div>
+					<div
+						ng-class="{'vedro':'media-body', 'sunce':'media-body', 'kisa':'media-body', 'oblacno':'media-body white', 'snijeg':'media-body', 'oluja':'media-body white', 'magla':'media-body'}[opis]"">
+						<h4 class="media-heading">Zalazak sunca</h4>
+						{{podaci.sunsetTime}}
+					</div>
+				</div>
+				<div class="media">
+					<div class="media-left">
+						<img class="media-object img-circle"
+							src="https://media.giphy.com/media/xeiH58RK81Kuc/source.gif"
+							style="width: 100px; height: 80px;">
+					</div>
+					<div
+						ng-class="{'vedro':'media-body', 'sunce':'media-body', 'kisa':'media-body', 'oblacno':'media-body white', 'snijeg':'media-body', 'oluja':'media-body white', 'magla':'media-body'}[opis]">
+						<h4 class="media-heading">Vjetar</h4>
+						{{podaci.currentWeather.wind.speed}} m/s
+					</div>
+				</div>
+			</div>
 		</div>
 </body>
 </html>

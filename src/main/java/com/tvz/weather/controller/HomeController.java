@@ -4,6 +4,7 @@ import java.net.URL;
 
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -25,13 +26,14 @@ public class HomeController {
     @RequestMapping(value = "/processForm", method=RequestMethod.GET)
     public String processForm(@RequestParam("name") String name, Model theModel) {
 
+    	String name2 = name.replaceAll("\\s", "+");
         // create object mapper
         ObjectMapper mapper = new ObjectMapper();
 
         try {
             WeatherBitApi currentWeather = mapper
                     .readValue(
-                            new URL("http://api.openweathermap.org/data/2.5/weather?q=" + name
+                            new URL("http://api.openweathermap.org/data/2.5/weather?q="+name2
                                     + "&units=metric&lang=hr&appid=c739e35da2a135760efb82c804b0ca6e"),
                             WeatherBitApi.class);
 
